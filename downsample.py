@@ -52,6 +52,7 @@ class Downsample(AudioModule):
         return AM_CONTINUE
 
     def process_all(self):
+        #("downsample factor",self.factor)
         while self.process_next_chunk() == AM_CONTINUE:
             pass
 

@@ -17,8 +17,8 @@ from fractions import Fraction
 from decimal import Decimal
 
 from audiomodule.audiomodule import AM_CONTINUE, AM_INPUT_REQUIRED, AudioModule, audiomod, Buffer
-from .upsample import Upsample
-from .downsample import Downsample
+from mods.upsample import Upsample
+from mods.downsample import Downsample
 
 
 @audiomod
@@ -57,9 +57,12 @@ class Resample(AudioModule):
                 if await self.upsample_module.next_chunk() == AM_INPUT_REQUIRED:
                     if self.input_pending():
                         signal = self.get_in_buf().get_all()
+                        
+                        #print("got a chunk of size ",len(signal))
                         if self.correction_total >= 1:
                             n=int(self.correction_total)
                             self.correction_total-=n
+                            #print(f"{self.correction} dropping {n} samples")
                         else:
                             n=0
                        
@@ -76,6 +79,7 @@ class Resample(AudioModule):
                 self.correction_total += self.correction
                 if self.correction_total <= -1:
                     n=-int(self.correction_total)
+                    #print(f"{self.correction} injecting {n} samples")
                     self.correction_total+=n
                     signal = self.get_in_buf().get_zero_buffer(n)
                     self.get_in_buf().append(signal)
@@ -128,6 +132,7 @@ class Resample(AudioModule):
         self.downsample_module.set_widget_params(downsample_params)
         self.correction = self.chunk_size/self.factor-self.chunk_size/(self.fraction.numerator/self.fraction.denominator)
         print(f"correction per chunk {self.correction}")
+        #self.correction_total = 0
         super().set_widget_params(params)
 
     def get_status(self):

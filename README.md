@@ -22,3 +22,11 @@ Use phase vocoding to stretch the input audio without altering its pitch.
 
 Change the pitch of the input audio, in terms of semitones, using `Stretch` and `Resample`.
 
+## IIR Design
+
+Implements an interface to SciPy's IIR filter design.
+
+## Frequency Modulation
+
+Modulate a carrier frequency with a signal.
+

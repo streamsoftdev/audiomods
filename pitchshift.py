@@ -12,9 +12,11 @@
 #See the License for the specific language governing permissions and
 #limitations under the License.
 
-from audiomodule.audiomodule import AM_CONTINUE, AM_INPUT_REQUIRED, AudioModule, audiomod
-from .stretch import Stretch
-from .resample import Resample
+import numpy as np
+
+from audiomodule.audiomodule import AM_CONTINUE, AM_INPUT_REQUIRED, AudioModule, audiomod, Buffer
+from mods.stretch import Stretch
+from mods.resample import Resample
 
 
 @audiomod
@@ -29,6 +31,7 @@ class PitchShift(AudioModule):
                  semitones: float = 1.0,
                  window_size: int = 2**13,
                  stride: int = 2**11,
+                 use_buffering:bool = True,
                  **kwargs):
         super().__init__(**kwargs)
         self.semitones = semitones
@@ -38,7 +41,8 @@ class PitchShift(AudioModule):
         self.total_consumed=0
         self.total_produced=0
         self.stretchModule = Stretch(
-            factor=1.0/self.factor, window_size=self.window_size, hop=self.stride)
+            factor=1.0/self.factor, window_size=self.window_size, hop=self.stride,
+            use_buffering=use_buffering)
         self.speedxModule = Resample(1.0/self.factor,polled=True)
         self.stretchModule.connect(self.speedxModule)
 
@@ -58,8 +62,6 @@ class PitchShift(AudioModule):
             else:
                 chunk = self.speedxModule.get_out_buf().get_chunk(self.chunk_size).buffer
                 self.send_signal(chunk)
-                #self.total_produced+=len(chunk)
-                #print(f"{self.mod_id} {self.total_consumed} {self.total_produced}")
                 return AM_CONTINUE
 
     def process_all(self):

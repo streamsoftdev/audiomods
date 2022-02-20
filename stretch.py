@@ -30,11 +30,13 @@ class Stretch(AudioModule):
                  factor: float = 0.5,
                  window_size: int = 2**13,
                  hop: int = 2**11,
+                 use_buffering:bool = True,
                  **kwargs):
         super().__init__(**kwargs)
         self.factor = factor
         self.window_size = window_size
         self.hop = hop
+        self.use_buffering=use_buffering
         self.phase = np.zeros(self.window_size,dtype=self.dtype)
         self.hanning_window = 0.5 * \
             (1.0 - np.cos(2.0*np.pi *
@@ -78,7 +80,7 @@ class Stretch(AudioModule):
     def process_next_chunk(self):
         # directly peek into the input buffer
         input_buffer = self.get_in_buf()
-        if self.buffering:
+        if self.buffering and self.use_buffering:
             self.buffering = input_buffer.size() < self.window_size+10.0*self.step
             return AM_INPUT_REQUIRED
         i2 = self.input_idx*self.hop
@@ -97,11 +99,11 @@ class Stretch(AudioModule):
                 step_adjust=1
             else:
                 step_adjust=0
-            a1 = input_buffer.buffer[0:self.window_size,0]
+            a1 = input_buffer.buffer()[0:self.window_size,0]
             if self.input_idx==0:
                 self.pre_output_buffer[:]=a1*self.hanning_window
                 self.input_idx+=1
-            a2 = input_buffer.buffer[self.step-step_adjust:self.window_size+self.step-step_adjust,0]
+            a2 = input_buffer.buffer()[self.step-step_adjust:self.window_size+self.step-step_adjust,0]
             s1 = np.fft.fft(np.fft.fftshift(self.hanning_window*a1))
             s2 = np.fft.fft(np.fft.fftshift(self.hanning_window*a2))
             
@@ -183,7 +185,8 @@ class Stretch(AudioModule):
                 self.send_signal(output_chunk.reshape(self.chunk_size,self.out_chs[0]))
                 self.output_idx += self.chunk_size
                 return AM_CONTINUE
-        self.buffering=True
+        if self.use_buffering:
+            self.buffering=True
         x = self.get_in_modules(0)
         if x != None:
             mod,idx = x
