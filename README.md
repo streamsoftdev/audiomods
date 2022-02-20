@@ -46,6 +46,34 @@ Generate white noise.
 
 Introduce a delay to the signal.
 
+## Audio Out
+
+Play audio on the system's audio device.
+
+## Channel Combine
+
+Combine multiple single-channel inputs into a single multi-channel output. For example, to combine a left channel and a right channel into a stero audio signal.
+
+## Channel Split
+
+Select channels to output from a multi-channel input.
+
+## Linear
+
+Linearly combine multiple inputs to a single output.
+
+## Mix Down
+
+Mix all channels to a single channel.
+
+## Multiply
+
+Multiply two inputs together.
+
+## Normalize
+
+Normalize the input using a running maximum.
+
 ## MIDI Support
 
 Not a module itself, but provides support functionality for using one-shot sound samples in a MIDI module, as well as other music related definitions.
