@@ -34,6 +34,18 @@ Modulate a carrier frequency with a signal.
 
 Write the input data to a WAV file.
 
+## Wave Generator
+
+Generate a sinusoidal wave.
+
+## Whitenoise Generator
+
+Generate white noise.
+
+## Delay
+
+Introduce a delay to the signal.
+
 ## MIDI Support
 
 Not a module itself, but provides support functionality for using one-shot sound samples in a MIDI module, as well as other music related definitions.
