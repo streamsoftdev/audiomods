@@ -30,3 +30,10 @@ Implements an interface to SciPy's IIR filter design.
 
 Modulate a carrier frequency with a signal.
 
+## To Wave File
+
+Write the input data to a WAV file.
+
+## MIDI Support
+
+Not a module itself, but provides support functionality for using one-shot sound samples in a MIDI module, as well as other music related definitions.
