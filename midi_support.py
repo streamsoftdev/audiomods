@@ -20,10 +20,10 @@ import json
 import time
 
 from audiomodule.audiomodule import AM_CONTINUE, AV_RATE, sw_dtype
-from mods.resample import Resample
-from mods.iirdesign import IIRDesign
-from mods.towavfile import ToWavFile
-from mods.pitchshift import PitchShift
+from audiomods.resample import Resample
+from audiomods.iirdesign import IIRDesign
+from audiomods.towavfile import ToWavFile
+from audiomods.pitchshift import PitchShift
 
 FUNDAMENTAL_NOTE_NAMES = ["A","As","B","C","Cs","D","Ds","E","F","Fs","G","Gs"]
 

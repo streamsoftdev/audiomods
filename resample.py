@@ -17,8 +17,8 @@ from fractions import Fraction
 from decimal import Decimal
 
 from audiomodule.audiomodule import AM_CONTINUE, AM_INPUT_REQUIRED, AudioModule, audiomod, Buffer
-from mods.upsample import Upsample
-from mods.downsample import Downsample
+from audiomods.upsample import Upsample
+from audiomods.downsample import Downsample
 
 
 @audiomod

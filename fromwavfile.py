@@ -20,8 +20,8 @@ from audiomodule.audiomodule import AM_INPUT_REQUIRED, AudioModule, sw_dtype, au
 
 import audiomodule.audiomodule as am
 import audioengine.audioengine as ae
-from mods.resample import Resample
-from mods.iirdesign import IIRDesign
+from audiomods.resample import Resample
+from audiomods.iirdesign import IIRDesign
 
 
 @audiomod

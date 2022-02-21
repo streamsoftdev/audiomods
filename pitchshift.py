@@ -15,8 +15,8 @@
 import numpy as np
 
 from audiomodule.audiomodule import AM_CONTINUE, AM_INPUT_REQUIRED, AudioModule, audiomod, Buffer
-from mods.stretch import Stretch
-from mods.resample import Resample
+from audiomods.stretch import Stretch
+from audiomods.resample import Resample
 
 
 @audiomod
