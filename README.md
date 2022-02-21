@@ -74,6 +74,10 @@ Multiply two inputs together.
 
 Normalize the input using a running maximum.
 
+## From WAV File
+
+Read data from a WAV file.
+
 ## MIDI Support
 
 Not a module itself, but provides support functionality for using one-shot sound samples in a MIDI module, as well as other music related definitions.
