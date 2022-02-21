@@ -78,6 +78,10 @@ Normalize the input using a running maximum.
 
 Read data from a WAV file.
 
+## MIDI
+
+Reads a MIDI file and produces synthesized music on the output.
+
 ## MIDI Support
 
 Not a module itself, but provides support functionality for using one-shot sound samples in a MIDI module, as well as other music related definitions.
